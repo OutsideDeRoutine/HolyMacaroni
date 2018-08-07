@@ -15,5 +15,4 @@ public class PortalController : MonoBehaviour {
         Mat.SetTexture("_PortalTex", currentRT);
         OPCamera.targetTexture = currentRT;
     }
-
 }
