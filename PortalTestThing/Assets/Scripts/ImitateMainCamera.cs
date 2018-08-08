@@ -11,9 +11,9 @@ public class ImitateMainCamera : MonoBehaviour {
         cam = this.GetComponent<Camera>();
     }
 
+    //MEJORAR!
     void Update () {
-        //Invertir giro (?) LA CAMARA HA DE SEGUIR EL PUNTO DE VISTA DEL JUGADOR!
-        cam.transform.rotation = Camera.main.transform.rotation * new Quaternion(-1,0,0,0);
-
+        cam.transform.rotation = Quaternion.Inverse(Camera.main.transform.rotation);
+        cam.transform.Rotate(Vector3.up * 180, Space.Self);
     }
 }
