@@ -13,15 +13,20 @@ public class PortalController : MonoBehaviour {
     //Set PortalTextures
     void Awake()
     {
-        RenderTexture currentRT = new RenderTexture(OPCamera.pixelHeight, OPCamera.pixelHeight,24);
+        RenderTexture currentRT = new RenderTexture(OPCamera.pixelHeight*2, OPCamera.pixelHeight*2,24);
         Mat.SetTexture("_PortalTex", currentRT);
         OPCamera.targetTexture = currentRT;
     }
 
     void OnTriggerEnter(Collider collider)
     {
+        Vector2 distXY = new Vector2(collider.transform.position.x - this.transform.position.x, collider.transform.position.y - this.transform.position.y);
         collider.transform.position = OPPortal.position;
-        collider.transform.Rotate(Vector3.up * 180, Space.Self);
+        Quaternion rot = this.transform.rotation;
+
+        float angle = Mathf.Abs(Quaternion.Angle(OPPortal.rotation, rot)) - 180;
+        collider.transform.Rotate(Vector3.up * angle, Space.Self);
+        collider.transform.Translate(distXY);
     }
 
 
